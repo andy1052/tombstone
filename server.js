@@ -9,6 +9,12 @@
 const http = require('http');
 const URL = require('url');
 
+//	Local Dependencies:
+const database = require('./db');
+const config = require('./config');
+
+
+
 //	Create the server:
 const server = http.createServer((request, response) => {
 
@@ -49,12 +55,9 @@ const server = http.createServer((request, response) => {
 			"payload": body
 		};
 
-		//console.log(data);
-
 
 		//	Choose the handler this request should go to, specify a default for not found:
 		let chosenHandler = typeof(router[trimmedPath]) !== 'undefined' ? router[trimmedPath] : handlers.notFound;
-		console.log(chosenHandler);
 
 
 		chosenHandler(data, (statusCode, payload) => {
@@ -63,29 +66,37 @@ const server = http.createServer((request, response) => {
 
 			payload = typeof(payload) === 'object' ? payload : {};
 
+			//	Return response:
+			response.setHeaders('Content-type', 'application/json');
 			response.writeHead(statusCode);
 			response.end(JSON.stringify(payload));
-
-
+	});
 
 		response.on('error', (err) => {
 			console.error(err);
 		});
-
-		// response.writeHead(200, {'Content-Type': 'application/json'});
-
-		// const responseBody = { headers, method, url, body };
-
-		// response.end(JSON.stringify(responseBody));
 	});
 
-	});
-
-}).listen(8000, () => {
-	console.log('Server is running on port 8000');
 });
 
 
+//	Initiate both the server and database:
+(async function() {
+	try {
+
+	let con = await database.connect();
+	let serve = await server.listen(config.port, () => {
+		console.log(`Server is running on port ${config.port}, in environment: ${config.envName}`);
+	});
+
+} catch(e) {
+	console.log(e);
+	return e;
+}
+}());
+
+
+//	Container for handlers
 const handlers = {};
 
 handlers.sample = function(data, callback) {
