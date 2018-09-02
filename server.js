@@ -12,6 +12,8 @@ const URL = require('url');
 //	Local Dependencies:
 const database = require('./db');
 const config = require('./config');
+const route = require('./route');
+const helpers = require('./helpers');
 
 
 
@@ -52,7 +54,7 @@ const server = http.createServer((request, response) => {
 			trimmedMethod,
 			headers,
 			queryStringObject,
-			"payload": body
+			"payload": helpers.parseJsonToObject(body)
 		};
 
 
@@ -110,5 +112,6 @@ handlers.notFound = function(data, callback) {
 
 
 const router = {
-	"yikes": handlers.sample
+	"yikes": handlers.sample,
+	"users": route._users.post
 }
