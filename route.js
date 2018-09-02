@@ -6,7 +6,7 @@
 */
 
 //	Dependencies:
-const db = require('./db');
+const dbFunc = require('./dbFuncs');
 
 
 //	Container
@@ -29,7 +29,7 @@ handlers._users = {};
 
 //	Users - post:
 //Required data: email address:
-handlers._users.post = function(data, callback) {
+handlers._users.post = async function(data, callback) {
 
 	//	Remember, data here must be parseJsonToObject(body) in server.js
 
@@ -39,10 +39,25 @@ handlers._users.post = function(data, callback) {
 	//	First check to see if user already exists:
 	const user = {"email": email};
 
-	db.read(user, 'user-email', (read) => {
-		console.log("Read from routes", read);
-	});
+	try {
 
+	const read = await dbFunc.find(user, 'user');
+	
+	 if (read) {
+	 	callback(400, {"Error": "This email already exists"});
+	 } else {
+	 	const write = await dbFunc.insert(user, 'user').then((user) => {
+	 		if ({"n": 1, "ok": 1}) {
+				callback(200, user);
+			} else {
+				callback(400, {"Error": "Could not add email in the database"});
+			}
+	 	});
+	 }
+	} catch (e) {
+		return e;
+	}
+	
 	
 		//	If no user exists, create them:
 		// db.create(user, 'user-email').then((user) => {

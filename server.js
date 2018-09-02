@@ -10,7 +10,7 @@ const http = require('http');
 const URL = require('url');
 
 //	Local Dependencies:
-const database = require('./db');
+const db = require('./db');
 const config = require('./config');
 const route = require('./route');
 const helpers = require('./helpers');
@@ -61,17 +61,21 @@ const server = http.createServer((request, response) => {
 		//	Choose the handler this request should go to, specify a default for not found:
 		let chosenHandler = typeof(router[trimmedPath]) !== 'undefined' ? router[trimmedPath] : handlers.notFound;
 
-
 		chosenHandler(data, (statusCode, payload) => {
 
 			statusCode = typeof(statusCode) === 'number' ? statusCode : 200;
 
 			payload = typeof(payload) === 'object' ? payload : {};
 
+			let payloadString = JSON.stringify(payload);
+
 			//	Return response:
-			response.setHeaders('Content-type', 'application/json');
+			response.setHeader('Content-type', 'application/json');
 			response.writeHead(statusCode);
-			response.end(JSON.stringify(payload));
+			response.end(payloadString);
+
+			//	Log the request path:
+			console.log("Returning this response: ", statusCode, payloadString);
 	});
 
 		response.on('error', (err) => {
@@ -86,7 +90,7 @@ const server = http.createServer((request, response) => {
 (async function() {
 	try {
 
-	let con = await database.connect();
+	let con = await db.Get();
 	let serve = await server.listen(config.port, () => {
 		console.log(`Server is running on port ${config.port}, in environment: ${config.envName}`);
 	});
