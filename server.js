@@ -10,11 +10,11 @@ const http = require('http');
 const URL = require('url');
 
 //	Local Dependencies:
-const db = require('./db');
-const config = require('./config');
-const route = require('./route');
-const helpers = require('./helpers');
-
+const db = require('./lib/db');
+const config = require('./lib/config');
+const route = require('./lib/route');
+const helpers = require('./lib/helpers');
+const handlers = require('./lib/handlers');
 
 
 //	Create the server:
@@ -59,18 +59,35 @@ const server = http.createServer((request, response) => {
 
 
 		//	Choose the handler this request should go to, specify a default for not found:
-		let chosenHandler = typeof(router[trimmedPath]) !== 'undefined' ? router[trimmedPath] : handlers.notFound;
+		let chosenHandler = typeof(router[trimmedPath]) !== 'undefined' ? router[trimmedPath] : route._users.notFound;
 
-		chosenHandler(data, (statusCode, payload) => {
+		//	Route the request to the handler specified in the router:
+		chosenHandler(data, (statusCode, payload, contentType) => {
 
+			//	Determine the type of response (fallback to json):
+			contentType = typeof(contentType) === 'string' ? contentType : 'json';
+
+			//	Use the statusCode called back by the handler or default to 200:
 			statusCode = typeof(statusCode) === 'number' ? statusCode : 200;
 
-			payload = typeof(payload) === 'object' ? payload : {};
+			//	Return response parts that are content specific:
+			let payloadString = '';
 
-			let payloadString = JSON.stringify(payload);
+			if (contentType === 'json') {
+				response.setHeader('Content-Type', 'application/json');
+			
+			//	Use the payload called back by the handler, or default to empty object:
+			payload = typeof(payload) === 'object' ? payload : {};
+			//	Convert the payload to a string:
+			payloadString = JSON.stringify(payload);
+			}
+
+			if (contentType === 'html') {
+				response.setHeader('Content-Type', 'text/html');
+				payloadString = typeof(payload) === 'string' ? payload : '';
+			}
 
 			//	Return response:
-			response.setHeader('Content-type', 'application/json');
 			response.writeHead(statusCode);
 			response.end(payloadString);
 
@@ -102,20 +119,7 @@ const server = http.createServer((request, response) => {
 }());
 
 
-//	Container for handlers
-const handlers = {};
-
-handlers.sample = function(data, callback) {
-	callback(200, {"Yes!": "I work!"});
-};
-
-handlers.notFound = function(data, callback) {
-	console.log('trimmedPath not found motherfucker!');
-	callback(404);
-};
-
-
 const router = {
-	"yikes": handlers.sample,
+	"": handlers.index,
 	"users": route._users.post
 }
