@@ -57,7 +57,7 @@ const server = http.createServer((request, response) => {
 			"payload": helpers.parseJsonToObject(body)
 		};
 
-
+console.log(data);
 		//	Choose the handler this request should go to, specify a default for not found:
 		let chosenHandler = typeof(router[trimmedPath]) !== 'undefined' ? router[trimmedPath] : route._users.notFound;
 

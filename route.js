@@ -15,7 +15,7 @@ const handlers = {};
 
 //	Blanket function to route methods 
 handlers.users = function(data, callback) {
-	let acceptableMethods = ['get','post'];
+	let acceptableMethods = 'post';
 	if (acceptableMethods.indexOf(data.trimmedMethod) > -1) {
 		handlers._users[data.trimmedMethod] (data, callback);
 	} else {
