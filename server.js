@@ -57,9 +57,11 @@ const server = http.createServer((request, response) => {
 			"payload": helpers.parseJsonToObject(body)
 		};
 
-console.log(data);
 		//	Choose the handler this request should go to, specify a default for not found:
 		let chosenHandler = typeof(router[trimmedPath]) !== 'undefined' ? router[trimmedPath] : route._users.notFound;
+
+		//	If request is in the public directory, use the public handler instead:
+		chosenHandler = trimmedPath.indexOf('public/') > -1 ? handlers.public : chosenHandler;
 
 		//	Route the request to the handler specified in the router:
 		chosenHandler(data, (statusCode, payload, contentType) => {
@@ -121,5 +123,6 @@ console.log(data);
 
 const router = {
 	"": handlers.index,
+	"public": handlers.public,
 	"users": route._users.post
 }
