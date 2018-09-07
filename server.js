@@ -89,12 +89,37 @@ const server = http.createServer((request, response) => {
 				payloadString = typeof(payload) === 'string' ? payload : '';
 			}
 
+			if (contentType === 'favicon') {
+				response.setHeader('Content-Type', 'image/x-icon');
+				payloadString = typeof(payload) !== 'undefined' ? payload : '';
+			}
+
+			if (contentType === 'css') {
+				response.setHeader('Content-Type', 'text/css');
+				payloadString = typeof(payload) !== 'undefined' ? payload : '';
+			}
+
+			if (contentType === 'png') {
+				response.setHeader('Content-Type', 'image/png');
+				payloadString = typeof(payload) !== 'undefined' ? payload : '';
+			}
+
+			if (contentType === 'jpg') {
+				response.setHeader('Content-Type', 'image/jpg');
+				payloadString = typeof(payload) !== 'undefined' ? payload : '';
+			}
+
+			if (contentType === 'plain') {
+				response.setHeader('Content-Type', 'text/plain');
+				payloadString = typeof(payload) !== 'undefined' ? payload : '';
+			}
+
 			//	Return response:
 			response.writeHead(statusCode);
 			response.end(payloadString);
 
 			//	Log the request path:
-			console.log("Returning this response: ", statusCode, payloadString);
+			console.log("Returning this response: ", statusCode, payloadString, contentType);
 	});
 
 		response.on('error', (err) => {
