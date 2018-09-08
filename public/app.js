@@ -9,21 +9,47 @@ window.onload = function() {
 
 console.log('Hello console!');
 
+//	Test: *** This Works Just fine! Goddamn it! ***
 
-function myFunction(e) {
+// postdata('http://localhost:3000/users', {"email": "paris@work.com"})
+// .then(data => console.log(JSON.stringify(data)))
+// .catch(error => console.error(error));
 
-	e.preventDefault();
 
-	let x = document.getElementById('emailSubmit');
-	let text = '';
-	let i;
-	for (i = 0; i < x.length; i++) {
-		text += x.elements[i].value + "<br>";
-		console.log(text);
-	}
-}
+function postdata(url = '', data = {}) {
+	return fetch(url, {
+		method: "POST",
+		headers: {"Content-type": "application/json"},
+		body: JSON.stringify(data)
+	})
+	.then(response => response.json())
+	.catch(e => console.error(e));
+};
 
-// let b = document.getElementById('btn');
+
+// ********************************************
+
+const x = document.getElementById('formSub');
+x.addEventListener("click", function(event) {
+
+event.preventDefault();
+
+	let user = document.querySelector('#in').value;
+
+	const data = {
+		"email": user
+	};
+
+console.log(data);
+
+	postdata('http://localhost:3000/users', data)
+	.then(data => console.log(JSON.stringify(data)))
+	.catch(error => console.error(error));
+
+}, false);
+
+
+
 
 // b.addEventListener("submit", (e) => {
 // 	e.preventDefault();
@@ -31,7 +57,7 @@ function myFunction(e) {
 // 	let a = new FormData(document.querySelector('in'));
 // 	console.log(a);
 
-// 	fetch("users", {
+// 	fetch("localhost:3000/users", {
 // 		method: 'POST',
 // 		body: {"email": a},
 // 		headers: {'Content-type': 'application/json'}
