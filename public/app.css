@@ -246,7 +246,7 @@ h2 {
 /*	Modal Header */
 .modal-header {
 	padding: 2px 16px;
-	background-color: #5cb85c;
+	background-color: /*#5cb85c*/#000;
 	color: white;
 }
 
@@ -260,7 +260,7 @@ h2 {
 /*	Modal Footer */
 .modal-footer {
 	padding: 2px 16px;
-	background-color: #5cb85c;
+	background-color: /*#5cb85c*/#000;
 	color: white;
 	text-align: center;
 }
@@ -282,4 +282,20 @@ h2 {
 #continue {
 	width: 250px;
 	margin: 5px auto;
+}
+
+#send-email {
+	text-align: center;
+	font-size: 18px;
+	width: 100%;
+	margin-top: 50px;
+	height: 200px;
+}
+
+#gmail {
+	color: blue;
+}
+
+#gmail:hover {
+	color: red;
 }

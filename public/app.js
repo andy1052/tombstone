@@ -54,6 +54,10 @@ const buy = document.getElementById('buy').addEventListener("click", function() 
 	location.href = "https://www.amazon.ca/Anthems-Blood-Marrow-Tombstone-Kane-ebook/dp/B07H7R6MHW/ref=sr_1_1?ie=UTF8&qid=1536682964&sr=8-1&keywords=anthems+of+the+blood+and+the+marrow";
 }, false);
 
+const anthem = document.getElementById('anthem').addEventListener("click", function() {
+	location.href = "https://www.amazon.ca/Anthems-Blood-Marrow-Tombstone-Kane-ebook/dp/B07H7R6MHW/ref=sr_1_1?ie=UTF8&qid=1536682964&sr=8-1&keywords=anthems+of+the+blood+and+the+marrow";
+}, false);
+
 
 // b.addEventListener("submit", (e) => {
 // 	e.preventDefault();
@@ -80,6 +84,9 @@ let modal = document.getElementById('myModal');
 //	Get the button that opens the modal:
 let btn = document.getElementById('myBtn');
 
+//	Get the button to send user to amazon from modal:
+let cont = document.getElementById('continue');
+
 //	Get the span element that closes the modal:
 let span = document.getElementsByClassName('close')[0];
 
@@ -87,6 +94,10 @@ let span = document.getElementsByClassName('close')[0];
 btn.onclick = function() {
 	modal.style.display = "block";
 };
+
+cont.onclick = function() {
+	location.href = "https://www.amazon.ca/Anthems-Blood-Marrow-Tombstone-Kane-ebook/dp/B07H7R6MHW/ref=sr_1_1?ie=UTF8&qid=1536682964&sr=8-1&keywords=anthems+of+the+blood+and+the+marrow";
+}
 
 
 //	When the user clicks on <span> (x), close the modal:
