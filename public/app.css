@@ -56,11 +56,16 @@ h2 {
 	width: 960px;
 	margin: 5px auto 15px auto;
 	padding: 5px;
-	text-align: center;
+	text-align: left;
 }
 
-#blurbParagraph {
+.blurbParagraph {
+	font-size: 18px;
+	text-indent: 40px;
+}
 
+#welcome {
+	font-size: 18px;
 }
 
 #skeletons {
@@ -112,7 +117,6 @@ h2 {
 	width: 45%;
 	margin: 100px 20px 0px 60px;
 	display: inline-table;
-	border: 1px solid black;
 
 }
 
@@ -124,6 +128,7 @@ h2 {
 	text-align: center;
 	display: inline-table;
 	border: 1px solid black;
+	border-radius: 10px;
 }
 
 .emailSubmit {
@@ -138,7 +143,7 @@ h2 {
 
 .thumb {
 	display: inline-block;
-	margin: 50px 50px 200px 200px;
+	margin: 50px 50px 200px 150px;
 	width: 250px;
 	text-align: center;
 }
@@ -158,6 +163,10 @@ h2 {
 
 .btn {
 	cursor: pointer;
+	width: 150px;
+	height: 30px;
+	border: 3px solid black;
+	border-radius: 20px;
 }
 
 .inputBtn {
@@ -167,4 +176,110 @@ h2 {
 
 .inputLabel {
 	padding: 10px;
+}
+
+#blurbHeader {
+	text-decoration: underline;
+}
+
+#formSub {
+	margin: 0px -50px !important;
+}
+
+#buy {
+	font-size: 18px;
+	color: red;
+	text-shadow: 1px 1px 0px #000;
+}
+
+.x {
+	width: 200px;
+	margin: 25px auto;
+}
+
+
+/*	The Modal Background */
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgb(0,0,0);
+	background-color: rgb(0,0,0,0.4);
+}
+
+
+/*	Modal Content Box */
+.modal-content {
+	position: relative;
+	background-color: #fefefe;
+	margin: auto;
+	padding: 0;
+	border: 1px solid #888;
+	width: 80%;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+	animation-name: animatetop;
+	animation-duration: 0.4s;
+}
+
+
+/*	The close button */
+.close {
+	color: white;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+
+.close:hover,
+.close:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+/*	Modal Header */
+.modal-header {
+	padding: 2px 16px;
+	background-color: #5cb85c;
+	color: white;
+}
+
+
+/*	Modal Body */
+.modal-body {
+	padding: 2px 16px;
+}
+
+
+/*	Modal Footer */
+.modal-footer {
+	padding: 2px 16px;
+	background-color: #5cb85c;
+	color: white;
+	text-align: center;
+}
+
+
+/*	Add Animation */
+@keyframes animatetop {
+	from {top: -300px; opacity: 0}
+	to {top: 0; opacity: 1}
+}
+
+/*	Sample Paragraphs */
+.format {
+	text-indent: 40px;
+	font-family: times new roman, arial, helvetica, sans-serif;
+	line-height: 1.5;
+}
+
+#continue {
+	width: 250px;
+	margin: 5px auto;
 }

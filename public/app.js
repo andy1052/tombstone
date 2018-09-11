@@ -49,6 +49,10 @@ console.log(data);
 }, false);
 
 
+//	Buy button - redirect to amazon kindle page:
+const buy = document.getElementById('buy').addEventListener("click", function() {
+	location.href = "https://www.amazon.ca/Anthems-Blood-Marrow-Tombstone-Kane-ebook/dp/B07H7R6MHW/ref=sr_1_1?ie=UTF8&qid=1536682964&sr=8-1&keywords=anthems+of+the+blood+and+the+marrow";
+}, false);
 
 
 // b.addEventListener("submit", (e) => {
@@ -65,5 +69,39 @@ console.log(data);
 // 		.then(response => console.log('Success: ', JSON.stringify(response)))
 // 		.catch(error => console.error('Error: ', error));
 // });
+
+
+/*
+	Javascript to open/close the modal window:
+*/
+//	Get the modal:
+let modal = document.getElementById('myModal');
+
+//	Get the button that opens the modal:
+let btn = document.getElementById('myBtn');
+
+//	Get the span element that closes the modal:
+let span = document.getElementsByClassName('close')[0];
+
+//	When the user clicks on the button, open the modal:
+btn.onclick = function() {
+	modal.style.display = "block";
+};
+
+
+//	When the user clicks on <span> (x), close the modal:
+span.onclick = function() {
+	modal.style.display = "none";
+};
+
+
+//	When the user clicks anywhere outside of the modal, close it:
+window.onclick = function(event) {
+	if (event.target === modal) {
+		modal.style.display = "none";
+	}
+};
+
+
 
 };
