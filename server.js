@@ -121,7 +121,7 @@ console.log("trimmed Path: ", trimmedPath);
 			response.end(payloadString);
 
 			//	Log the request path:
-			console.log("Returning this response: ", statusCode, payloadString, contentType);
+			console.log("Returning this response: ", statusCode, contentType);
 	});
 
 		response.on('error', (err) => {
