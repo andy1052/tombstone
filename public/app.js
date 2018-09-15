@@ -20,6 +20,8 @@ function postdata(url = '', data = {}) {
 	return fetch(url, {
 		method: "POST",
 		headers: {"Content-type": "application/json"},
+		mode: "cors",
+		cache: "no-cache",
 		body: JSON.stringify(data)
 	})
 	.then(response => response.json())
