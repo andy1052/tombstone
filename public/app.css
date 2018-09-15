@@ -178,6 +178,20 @@ h2 {
 	padding: 10px;
 }
 
+#enter {
+	display: block;
+}
+
+#response {
+	display: none;
+	color: blue;
+}
+
+#fail {
+	display: none;
+	color: red;
+}
+
 #blurbHeader {
 	text-decoration: underline;
 }
@@ -284,6 +298,8 @@ h2 {
 	margin: 5px auto;
 }
 
+/*	css for contact template */
+
 #send-email {
 	text-align: center;
 	font-size: 18px;
@@ -292,10 +308,25 @@ h2 {
 	height: 200px;
 }
 
-#gmail {
+.gmail {
 	color: blue;
 }
 
-#gmail:hover {
+.gmail:hover {
 	color: red;
+}
+
+/*	css for Books template */
+
+.title {
+	text-align: left;
+	text-decoration: underline;
+	width: 100%;
+	margin: 100px 0px 30px 5px;
+}
+
+.disp {
+	width: 100%;
+	margin: 20px 0px 50px 5px;
+	font-size: 18px;
 }

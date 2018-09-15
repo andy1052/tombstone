@@ -33,10 +33,15 @@
 
 
 <div class="formWrapper">
-	<form id="emailSubmit">
+	<form id="emailSubmit" autocomplete="off">
 		<div class="formError"></div>
 		<div class="inputWrapper">
-			<div class="inputLabel">Enter your email to join the Tombstone</div>
+			<div class="inputLabel" id="enter">Enter your email to join the Tombstone</div>
+
+			<div class="inputLabel" id="response">"Thanks for joining! I think you and I are going to go places you never thought possible!"</div>
+
+			<div class="inputLabel" id="fail">Thanks for the enthusiasm, but this email address is already etched into the Tombstone!</div>
+
 			<input id="in" type="text" name="email" placeholder="Debbie@example.com"/>
 		</div>
 		<div class="inputBtn">
@@ -62,7 +67,6 @@
 <button class="btn" id="anthem" type="button">Learn More</button>
 </div>
 
-<h3>Coming Soon!</h3>
 
 <div class="thumb">
 	<a href="">

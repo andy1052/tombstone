@@ -27,6 +27,18 @@ function postdata(url = '', data = {}) {
 };
 
 
+//	************************************************
+//	Reset the text when input is in focus:
+let focus = document.getElementById('in');
+focus.addEventListener("focus", function() {
+	let input = document.querySelector('input').value = '';
+	let response = document.getElementById('response').style.display = "none";
+	let fail = document.getElementById('fail').style.display = "none";
+	let old = document.getElementById('enter').style.display = "block";
+});
+
+
+
 // ********************************************
 
 const x = document.getElementById('formSub');
@@ -36,16 +48,25 @@ event.preventDefault();
 
 	let user = document.querySelector('#in').value;
 
+
 	const data = {
 		"email": user
 	};
 
-console.log(data);
-
 	postdata('http://localhost:3000/users', data)
-	.then(data => console.log(JSON.stringify(data)))
-	.catch(error => console.error(error));
+	.then((data) => {
+		//console.log(JSON.stringify(data));
+		if (data.n === 1) {
+			let old = document.getElementById('enter').style.display = "none";
+			let response = document.getElementById('response').style.display = "block";
 
+		} else {
+			let old = document.getElementById('enter').style.display = "none";
+			response.style.display = "none";
+			let fail = document.getElementById('fail').style.display = "block";
+		}
+		})
+	.catch(error => console.error("Error console:", error));
 }, false);
 
 
